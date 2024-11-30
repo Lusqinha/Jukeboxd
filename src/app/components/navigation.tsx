@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import { useState } from "react";;
+import { useState } from "react";
+import { Button } from "./ui/button";
+import { Search } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 
 interface Album {
   name: string;
@@ -65,6 +68,7 @@ export function Navigation({ onAlbumsFetched }: NavigationProps) {
   return (
     <div className="space-y-4 p-4">
       <div className="flex items-center space-x-2">
+        <h2 className="text-2xl font-bold">Explorar</h2>
         <input
           type="text"
           placeholder="Buscar álbuns"
@@ -72,37 +76,33 @@ export function Navigation({ onAlbumsFetched }: NavigationProps) {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="flex-1 rounded-lg border border-gray-300 p-2"
         />
-        <button
+        <Button
           onClick={handleSearch}
           className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
         >
-          Buscar
-        </button>
-      </div>
-
-      <div className="flex space-x-2">
-        <button
-          onClick={() => fetchAlbums("pop")}
-          className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
-        >
-          Pop
-        </button>
-        <button
-          onClick={() => fetchAlbums("rock")}
-          className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
-        >
-          Rock
-        </button>
-        <button
-          onClick={() => fetchAlbums("jazz")}
-          className="rounded-lg bg-purple-500 px-4 py-2 text-white hover:bg-purple-600"
-        >
-          Jazz
-        </button>
+          <Search />
+        </Button >
       </div>
 
       {error && <div className="text-red-500">{error}</div>}
       {loading && <div>Carregando...</div>}
+
+      <Tabs defaultValue="albums" className="w-full">
+        <TabsList className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <TabsTrigger value="reviews" className="flex-1">
+            Resenhas
+          </TabsTrigger>
+          <TabsTrigger value="albums" className="flex-1">
+            Albums
+          </TabsTrigger>
+          <TabsTrigger value="comunidades" className="flex-1">
+            Comunidades
+          </TabsTrigger>
+          <TabsTrigger value="musicas" className="flex-1">
+            Músicas
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
     </div>
   );
 }

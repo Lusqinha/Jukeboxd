@@ -23,7 +23,6 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      {/* Navigation agora passa o callback correto */}
       <Navigation onAlbumsFetched={handleAlbumsFetched} />
       <main className="space-y-6 py-6">
         {/* Section renderiza os álbuns dinamicamente */}

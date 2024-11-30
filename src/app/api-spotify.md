@@ -127,3 +127,40 @@ export default function Home() {
     </div>
   );
 }
+
+return (
+    <div>
+      <Button onClick={fetchTracks} disabled={loading}>
+        <Search className="h-5 w-5" />
+      </Button>
+
+      <Tabs defaultValue="albums" className="w-full">
+        <TabsList className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <TabsTrigger value="reviews" className="flex-1">
+            Resenhas
+          </TabsTrigger>
+          <TabsTrigger value="albums" className="flex-1">
+            Albums
+          </TabsTrigger>
+          <TabsTrigger value="singles" className="flex-1">
+            Singles
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
+
+      {error && <div className="error">{error}</div>}
+
+      <div className="album-list">
+        {tracks.map((track, index) => (
+          <AlbumCard
+            key={index}
+            name={track.name}
+            artist={track.artist}
+            rating={4.5} // Aqui você pode definir um valor de rating, ou ajustar conforme necessário
+            imageUrl={track.albumImage}
+            external_url={track.external_url} // Link do Spotify
+          />
+        ))}
+      </div>
+    </div>
+  );
