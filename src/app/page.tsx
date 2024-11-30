@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 
+
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [responseData, setResponseData] = useState(null);
