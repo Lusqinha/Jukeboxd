@@ -1,15 +1,18 @@
-import { ChevronRight } from 'lucide-react'
-import { Button } from "./ui/button"
-import { AlbumCard } from "./album-card"
+import { AlbumCard } from "./album-card";
+import { Button } from "./ui/button";
+import { ChevronRight } from "lucide-react";
+
+interface Album {
+  name: string;
+  artist: string;
+  albumImage: string;
+  external_url: string;
+  rating: number;
+}
 
 interface SectionProps {
-  title: string
-  albums: Array<{
-    name: string
-    artist: string
-    rating: number
-    imageUrl: string
-  }>
+  title: string;
+  albums: Album[];
 }
 
 export function Section({ title, albums }: SectionProps) {
@@ -23,10 +26,16 @@ export function Section({ title, albums }: SectionProps) {
       </div>
       <div className="space-y-4 px-4">
         {albums.map((album, index) => (
-          <AlbumCard key={index} {...album} />
+          <AlbumCard
+            key={index}
+            name={album.name}
+            artist={album.artist}
+            imageUrl={album.albumImage}
+            external_url={album.external_url}
+            rating={album.rating}
+          />
         ))}
       </div>
     </div>
-  )
+  );
 }
-
