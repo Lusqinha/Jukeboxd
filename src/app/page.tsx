@@ -1,60 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+"use client"
+import { useState } from "react";
 import { Header } from "./components/header";
-import { Navigation } from "./components/navigation"
-import { Section } from "./components/section"
+import { Navigation } from "./components/navigation";
+import { Section } from "./components/section";
 
-const trendingAlbums = [
-  {
-    name: "Album nome",
-    artist: "Artista",
-    rating: 4.05,
-    imageUrl: "/placeholder.svg?height=64&width=64",
-  },
-  {
-    name: "Album nome",
-    artist: "Artista",
-    rating: 4.05,
-    imageUrl: "/placeholder.svg?height=64&width=64",
-  },
-  {
-    name: "Album nome",
-    artist: "Artista",
-    rating: 4.05,
-    imageUrl: "/placeholder.svg?height=64&width=64",
-  },
-]
-
-const recommendedAlbums = [
-  {
-    name: "Album nome",
-    artist: "Artista",
-    rating: 4.05,
-    imageUrl: "/placeholder.svg?height=64&width=64",
-  },
-  {
-    name: "Album nome",
-    artist: "Artista",
-    rating: 4.05,
-    imageUrl: "/placeholder.svg?height=64&width=64",
-  },
-  {
-    name: "Album nome",
-    artist: "Artista",
-    rating: 4.05,
-    imageUrl: "/placeholder.svg?height=64&width=64",
-  },
-]
+interface Album {
+  name: string;
+  artist: string;
+  albumImage: string;
+  external_url: string;
+  rating: number;
+}
 
 export default function Home() {
+  const [albums, setAlbums] = useState<Album[]>([]); // Use o tipo Album para garantir a tipagem correta
+
+  const handleAlbumsFetched = (fetchedAlbums: Album[]) => {
+    setAlbums(fetchedAlbums);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <Navigation />
+      <Navigation onAlbumsFetched={handleAlbumsFetched} />
       <main className="space-y-6 py-6">
-        <Section title="Em alta" albums={trendingAlbums} />
-        <Section title="Recomendações" albums={recommendedAlbums} />
+        {/* Section renderiza os álbuns dinamicamente */}
+        <Section title="Em alta" albums={albums} />
       </main>
     </div>
-  )
+  );
 }
+
+
