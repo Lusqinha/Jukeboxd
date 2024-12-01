@@ -1,4 +1,4 @@
-import { FollowerGET } from "@/app/types/follower";
+
 import prisma from "@/lib/db";
 
 
