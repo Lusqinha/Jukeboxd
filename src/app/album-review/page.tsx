@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { AlbumCard } from "../components/album-card";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 
 interface Review {
@@ -10,10 +10,10 @@ interface Review {
   text: string;
 }
 
-export default function AlbumReview() {
+function AlbumReviewContent() {
   const [isEditing, setIsEditing] = useState(false);
   const [reviewText, setReviewText] = useState("");
-  const [reviews, setReviews] = useState<Review[]>([]); // Tipando o estado
+  const [reviews, setReviews] = useState<Review[]>([]);
 
   const searchParams = useSearchParams();
   const name = searchParams.get("name");
@@ -22,7 +22,6 @@ export default function AlbumReview() {
   const imageUrl = searchParams.get("imageUrl");
   const external_url = searchParams.get("external_url");
 
-  // Carregar avaliações do localStorage ao montar o componente
   useEffect(() => {
     const storedReviews = localStorage.getItem("reviews");
     if (storedReviews) {
@@ -30,7 +29,6 @@ export default function AlbumReview() {
     }
   }, []);
 
-  // Atualizar o localStorage sempre que as avaliações mudarem
   useEffect(() => {
     localStorage.setItem("reviews", JSON.stringify(reviews));
   }, [reviews]);
@@ -41,9 +39,8 @@ export default function AlbumReview() {
       return;
     }
 
-    const newReview: Review = { username: "@meuUsuario", text: reviewText }; // Usando o tipo Review
+    const newReview: Review = { username: "@meuUsuario", text: reviewText };
     setReviews((prevReviews) => [...prevReviews, newReview]);
-
     setIsEditing(false);
     setReviewText("");
   };
@@ -63,7 +60,7 @@ export default function AlbumReview() {
       <div className="flex flex-col md:flex-row items-center gap-4">
         <AlbumCard
           name={name as string}
-          artist={artist as string} // comentario para subir local storage
+          artist={artist as string}
           rating={Number(rating)}
           imageUrl={imageUrl as string}
           external_url={external_url as string}
@@ -121,5 +118,13 @@ export default function AlbumReview() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AlbumReview() {
+  return (
+    <Suspense fallback={<div>Carregando página...</div>}>
+      <AlbumReviewContent />
+    </Suspense>
   );
 }
