@@ -35,7 +35,7 @@ export function Navigation({ onAlbumsFetched }: NavigationProps) {
       const res = await fetch(url.toString(), {
         method: "GET",
         headers: {
-          Authorization: `Bearer BQCToIWPJ5lOFHke1x0FdUg20oQzdLF9agi0euTWPmxh0JOW8THHpKHvZWICfj-INhgjVY7YF5NjIN7BkiyXidF6lorFQYdTG_YfIKV8sIMBaVHLIYQ`, // Substitua pelo token da API
+          Authorization: `Bearer BQCH1avCmjo3U-Qaj0P9nlMt7ewgYbYpHaktYGEg6OJsquXctjidW7rCO7IEQqtlN1QwNlYwXoP_kbJqT50YlfcTUZA23_R_QFEZL-zOTjGt8l2dQwU`, // Substitua pelo token da API
           "Content-Type": "application/json",
         },
       });
