@@ -66,15 +66,15 @@ export function Navigation({ onAlbumsFetched }: NavigationProps) {
   };
 
   return (
-    <div className="space-y-4 p-4">
+    <div className="space-y-4 p-4 bg-black">
       <div className="flex items-center space-x-2">
-        <h2 className="text-2xl font-bold">Explorar</h2>
+        <h2 className="text-2xl text-white font-bold">Explorar</h2>
         <input
           type="text"
           placeholder="Buscar álbuns"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-1 rounded-lg border border-gray-300 p-2"
+          className="flex-1 rounded-lg border border-gray-300 p-2 text-white"
         />
         <Button
           onClick={handleSearch}
@@ -85,7 +85,7 @@ export function Navigation({ onAlbumsFetched }: NavigationProps) {
       </div>
 
       {error && <div className="text-red-500">{error}</div>}
-      {loading && <div>Carregando...</div>}
+      {loading && <div className="text-white">Carregando...</div>}
 
       <Tabs defaultValue="albums" className="w-full">
         <TabsList className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

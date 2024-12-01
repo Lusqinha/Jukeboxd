@@ -21,10 +21,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background bg-black">
       <Header />
       <Navigation onAlbumsFetched={handleAlbumsFetched} />
-      <main className="space-y-6 py-6">
+      <main className="space-y-6 py-6 bg-black">
         {/* Section renderiza os álbuns dinamicamente */}
         <Section title="Em alta" albums={albums} />
       </main>

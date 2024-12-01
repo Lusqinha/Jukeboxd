@@ -71,7 +71,7 @@ export function AlbumCard({
               query: { name, artist, rating, imageUrl, external_url },
             }}
           >
-            <p className="text-primary underline mt-2">Ir para a revisão completa</p>
+            <p className="text-primary text-white underline mt-2">Ir para a revisão completa</p>
           </Link>
         </div>
       )}

@@ -17,14 +17,14 @@ interface SectionProps {
 
 export function Section({ title, albums }: SectionProps) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 bg-black">
       <div className="flex items-center justify-between px-4">
-        <h2 className="text-lg font-semibold">{title}</h2>
+        <h2 className="text-lg text-white font-semibold">{title}</h2>
         <Button variant="ghost" size="icon">
-          <ChevronRight className="h-5 w-5" />
+          <ChevronRight className="h-5 w-5 text-white" />
         </Button>
       </div>
-      <div className="space-y-4 px-4">
+      <div className="space-y-4 px-4 text-white">
         {albums.map((album, index) => (
           <AlbumCard
             key={index}
