@@ -2,16 +2,38 @@
 
 import { useSearchParams } from "next/navigation";
 import { AlbumCard } from "../components/album-card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
+interface Review {
+  username: string;
+  text: string;
+}
+
 export default function AlbumReview() {
-  const [isEditing, setIsEditing] = useState(false); // Controla a exibição da textarea
-  const [reviewText, setReviewText] = useState(""); // Armazena o texto digitado na textarea
-  const [reviews, setReviews] = useState([
-    { username: "@usuaria", text: "Essa música é maravilhosa!" },
-    { username: "@usuario", text: "Impressionante como isso me lembra da minha infância, que saudades!" },
-  ]); // Lista de revisões existentes
+  const [isEditing, setIsEditing] = useState(false);
+  const [reviewText, setReviewText] = useState("");
+  const [reviews, setReviews] = useState<Review[]>([]); // Tipando o estado
+
+  const searchParams = useSearchParams();
+  const name = searchParams.get("name");
+  const artist = searchParams.get("artist");
+  const rating = searchParams.get("rating");
+  const imageUrl = searchParams.get("imageUrl");
+  const external_url = searchParams.get("external_url");
+
+  // Carregar avaliações do localStorage ao montar o componente
+  useEffect(() => {
+    const storedReviews = localStorage.getItem("reviews");
+    if (storedReviews) {
+      setReviews(JSON.parse(storedReviews));
+    }
+  }, []);
+
+  // Atualizar o localStorage sempre que as avaliações mudarem
+  useEffect(() => {
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+  }, [reviews]);
 
   const handleSaveReview = () => {
     if (reviewText.trim() === "") {
@@ -19,22 +41,12 @@ export default function AlbumReview() {
       return;
     }
 
-    // Adiciona a nova revisão na lista
-    setReviews((prevReviews) => [
-      ...prevReviews,
-      { username: "@meuUsuario", text: reviewText }, // Exemplo de nome de usuário
-    ]);
+    const newReview: Review = { username: "@meuUsuario", text: reviewText }; // Usando o tipo Review
+    setReviews((prevReviews) => [...prevReviews, newReview]);
 
-    setIsEditing(false); // Fecha o modo de edição
-    setReviewText(""); // Limpa o campo após salvar
+    setIsEditing(false);
+    setReviewText("");
   };
-  const searchParams = useSearchParams();
-
-  const name = searchParams.get("name");
-  const artist = searchParams.get("artist");
-  const rating = searchParams.get("rating");
-  const imageUrl = searchParams.get("imageUrl");
-  const external_url = searchParams.get("external_url");
 
   if (!name || !artist || !rating || !imageUrl || !external_url) {
     return <div>Carregando...</div>;
@@ -42,18 +54,12 @@ export default function AlbumReview() {
 
   return (
     <div className="p-4 md:p-8 bg-black text-white min-h-screen">
-      {/* Voltar */}
       <button className="p-2 bg-gray-800 rounded-md mb-4">
-        <Link
-          href={{
-            pathname: "/"
-          }}
-        >
+        <Link href="/">
           <p>←</p>
         </Link>
       </button>
 
-      {/* Informações principais */}
       <div className="flex flex-col md:flex-row items-center gap-4">
         <AlbumCard
           name={name as string}
@@ -61,26 +67,21 @@ export default function AlbumReview() {
           rating={Number(rating)}
           imageUrl={imageUrl as string}
           external_url={external_url as string}
-          layout="review" // Define o layout como "review"
+          layout="review"
         />
       </div>
 
-      {/* Resenhas */}
       <div className="mt-8">
         <h3 className="text-xl font-bold mb-4">Resenhas</h3>
         <div className="flex gap-2 mb-4">
-          {/* Ícones de ação */}
           <button
             className="p-2 bg-gray-800 rounded-md"
             onClick={() => setIsEditing(!isEditing)}
           >
             ✏️
           </button>
-          <button className="p-2 bg-gray-800 rounded-md">🔍</button>
-          <button className="p-2 bg-gray-800 rounded-md">⭐</button>
-          <button className="p-2 bg-gray-800 rounded-md">👤</button>
         </div>
-        {/* Área de edição da avaliação */}
+
         {isEditing && (
           <div className="bg-gray-800 p-4 rounded-md">
             <textarea
@@ -106,12 +107,11 @@ export default function AlbumReview() {
             </div>
           </div>
         )}
+
         <div className="space-y-4 mt-6">
           {reviews.map((review, index) => (
             <div key={index} className="flex gap-4">
-              {/* Avatar */}
               <div className="w-10 h-10 bg-gray-600 rounded-full"></div>
-              {/* Detalhes da revisão */}
               <div>
                 <p className="font-semibold">{review.username}</p>
                 <p className="text-sm text-gray-300">{review.text}</p>
