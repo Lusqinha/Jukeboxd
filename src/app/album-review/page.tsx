@@ -2,12 +2,16 @@
 
 import { useSearchParams } from "next/navigation";
 import { AlbumCard } from "../components/album-card";
-import { Star } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function AlbumReview() {
   const [isEditing, setIsEditing] = useState(false); // Controla a exibição da textarea
-  const [reviewText, setReviewText] = useState(""); // Armazena o texto da avaliação
+  const [reviewText, setReviewText] = useState(""); // Armazena o texto digitado na textarea
+  const [reviews, setReviews] = useState([
+    { username: "@usuaria", text: "Essa música é maravilhosa!" },
+    { username: "@usuario", text: "Impressionante como isso me lembra da minha infância, que saudades!" },
+  ]); // Lista de revisões existentes
 
   const handleSaveReview = () => {
     if (reviewText.trim() === "") {
@@ -15,11 +19,15 @@ export default function AlbumReview() {
       return;
     }
 
-    console.log("Avaliação salva:", reviewText);
+    // Adiciona a nova revisão na lista
+    setReviews((prevReviews) => [
+      ...prevReviews,
+      { username: "@meuUsuario", text: reviewText }, // Exemplo de nome de usuário
+    ]);
+
     setIsEditing(false); // Fecha o modo de edição
     setReviewText(""); // Limpa o campo após salvar
   };
-
   const searchParams = useSearchParams();
 
   const name = searchParams.get("name");
@@ -36,29 +44,25 @@ export default function AlbumReview() {
     <div className="p-4 md:p-8 bg-black text-white min-h-screen">
       {/* Voltar */}
       <button className="p-2 bg-gray-800 rounded-md mb-4">
-        ←
+        <Link
+          href={{
+            pathname: "/"
+          }}
+        >
+          <p>←</p>
+        </Link>
       </button>
 
       {/* Informações principais */}
       <div className="flex flex-col md:flex-row items-center gap-4">
         <AlbumCard
-          name={name}
-          artist={artist}
-          rating={parseFloat(rating)}
-          imageUrl={imageUrl}
+          name={name as string}
+          artist={artist as string}
+          rating={Number(rating)}
+          imageUrl={imageUrl as string}
+          external_url={external_url as string}
+          layout="review" // Define o layout como "review"
         />
-        <div className="flex flex-col">
-          <h1 className="text-xl font-bold">Heaven or Las Vegas</h1>
-          <h2 className="text-md text-gray-300">Cocteau Twins</h2>
-          <div className="flex items-center mt-2">
-            <span className="text-lg font-semibold">4.05</span>
-            <Star className="h-5 w-5 fill-primary text-primary ml-1" />
-          </div>
-          <p className="text-sm text-gray-400">Tipo - LP</p>
-          <p className="text-sm text-gray-400">Lançamento - 17 Set 1990</p>
-          <p className="text-sm text-gray-400">Ranking - #34 geral</p>
-          <p className="text-sm text-gray-400">Gêneros - Pop Psicodélico, Onda etérea</p>
-        </div>
       </div>
 
       {/* Resenhas */}
@@ -76,6 +80,7 @@ export default function AlbumReview() {
           <button className="p-2 bg-gray-800 rounded-md">⭐</button>
           <button className="p-2 bg-gray-800 rounded-md">👤</button>
         </div>
+        {/* Área de edição da avaliação */}
         {isEditing && (
           <div className="bg-gray-800 p-4 rounded-md">
             <textarea
@@ -101,28 +106,18 @@ export default function AlbumReview() {
             </div>
           </div>
         )}
-        <div className="space-y-4">
-          {/* Resenha 1 */}
-          <div className="flex gap-4">
-            <div className="w-10 h-10 bg-gray-600 rounded-full"></div>
-            <div>
-              <p className="font-semibold">@usuaria</p>
-              <p className="text-sm text-gray-300">
-                Assim que ouço aquelas notas de abertura de Cherry-Colored Funk...
-              </p>
+        <div className="space-y-4 mt-6">
+          {reviews.map((review, index) => (
+            <div key={index} className="flex gap-4">
+              {/* Avatar */}
+              <div className="w-10 h-10 bg-gray-600 rounded-full"></div>
+              {/* Detalhes da revisão */}
+              <div>
+                <p className="font-semibold">{review.username}</p>
+                <p className="text-sm text-gray-300">{review.text}</p>
+              </div>
             </div>
-          </div>
-
-          {/* Resenha 2 */}
-          <div className="flex gap-4">
-            <div className="w-10 h-10 bg-gray-600 rounded-full"></div>
-            <div>
-              <p className="font-semibold">@usuario</p>
-              <p className="text-sm text-gray-300">
-                Heaven or Las Vegas é o auge da genialidade dos Cocteau Twins...
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
