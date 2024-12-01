@@ -63,7 +63,7 @@ export default function AlbumReview() {
       <div className="flex flex-col md:flex-row items-center gap-4">
         <AlbumCard
           name={name as string}
-          artist={artist as string}
+          artist={artist as string} // comentario para subir local storage
           rating={Number(rating)}
           imageUrl={imageUrl as string}
           external_url={external_url as string}
