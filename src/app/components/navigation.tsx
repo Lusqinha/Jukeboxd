@@ -74,7 +74,7 @@ export function Navigation({ onAlbumsFetched }: NavigationProps) {
           placeholder="Buscar álbuns"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-1 rounded-lg border border-gray-300 p-2 text-white"
+          className="flex-1 rounded-lg border border-gray-300 p-2 text-black"
         />
         <Button
           onClick={handleSearch}
