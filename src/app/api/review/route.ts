@@ -1,6 +1,6 @@
 import prisma from "@/lib/db";
 
-export async function GET(): Promise<Response> { 
+export async function GET(): Promise<Response> {
     const reviews = await prisma.review.findMany({
         include: {
             user: true
@@ -12,19 +12,17 @@ export async function GET(): Promise<Response> {
     })
 }
 
-export async function POST( req: Request): Promise<Response> {
-    
+export async function POST(req: Request): Promise<Response> {
+
     const { userId, spotifyid, rating, text } = await req.json();
 
     const review = await prisma.review.create({
         data: {
-
-        userId,
-        spotifyId: spotifyid,
-        rating,
-        text
-
-    }
+            userId,
+            spotifyId: spotifyid,
+            rating,
+            text
+        }
     });
 
     return Response.json({
