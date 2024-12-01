@@ -35,7 +35,7 @@ export function Navigation({ onAlbumsFetched }: NavigationProps) {
       const res = await fetch(url.toString(), {
         method: "GET",
         headers: {
-          Authorization: `Bearer BQACvz1s82pIfIE8d_a1o6T5XlqdaTHVtsEzNCedtAVSBMpYEUX8ajZzX_BFnTjyis0n4MHzvBViKiLfpJtEerWm8Ay5WCLlRsnWuGuXEVzWgsVJf_s`, // Substitua pelo token da API
+          Authorization: `Bearer BQAPhnoFUSPmtHUU5Ym5L3UrqQEhMQrPJ4bFfztJZiVGnM4flVryI8-iZKdWxwQeB1XWsApaGGxcqtweACH0krApUPzbRf5CPMcNkgd4eTDbhAQpa2E`, // Substitua pelo token da API
           "Content-Type": "application/json",
         },
       });
@@ -93,7 +93,7 @@ export function Navigation({ onAlbumsFetched }: NavigationProps) {
             Resenhas
           </TabsTrigger>
           <TabsTrigger value="albums" className="flex-1">
-            Albums
+            Albuns
           </TabsTrigger>
           <TabsTrigger value="comunidades" className="flex-1">
             Comunidades
