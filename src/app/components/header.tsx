@@ -1,5 +1,6 @@
-import { Settings, User } from 'lucide-react'
+import { Settings } from 'lucide-react'
 import { Button } from "@/app/components/ui/button"
+import Link from 'next/link'
 
 export function Header() {
   return (
@@ -11,8 +12,8 @@ export function Header() {
 
         <h1 className="text-xl text-white font-semibold">Jukeboxd</h1>
 
-        <Button variant="ghost" size="icon">
-          <User className="h-5 w-5 text-white" />
+        <Button asChild variant='outline'>
+          <Link href="/login">Login</Link>
         </Button>
       </header>
     </div>
