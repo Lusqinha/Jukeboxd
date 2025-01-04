@@ -1,5 +1,6 @@
 type UserProfile = {
   id: string,
+  accessToken: string;
   name: string;
   email: string;
   avatar_url: string;

@@ -15,7 +15,7 @@ interface Album {
 
 export default function Home() {
   const [albums, setAlbums] = useState<Album[]>([]); // Use o tipo Album para garantir a tipagem correta
-
+  
   const handleAlbumsFetched = (fetchedAlbums: Album[]) => {
     setAlbums(fetchedAlbums);
   };
@@ -31,5 +31,3 @@ export default function Home() {
     </div>
   );
 }
-
-

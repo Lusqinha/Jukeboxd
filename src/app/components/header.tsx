@@ -1,6 +1,8 @@
+"use-client"
 import { Settings } from 'lucide-react'
+import { signIn } from "next-auth/react";
 import { Button } from "@/app/components/ui/button"
-import Link from 'next/link'
+
 
 export function Header() {
   return (
@@ -12,9 +14,7 @@ export function Header() {
 
         <h1 className="text-xl text-white font-semibold">Jukeboxd</h1>
 
-        <Button asChild variant='outline'>
-          <Link href="/login">Login</Link>
-        </Button>
+        <Button variant='outline' onClick={() => signIn("spotify")}>Login</Button>
       </header>
     </div>
   )
