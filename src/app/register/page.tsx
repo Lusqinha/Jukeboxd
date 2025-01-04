@@ -5,6 +5,7 @@ import { Input } from "@/app/components/ui/input";
 
 import { UserCredentials } from "@/@types/user";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const [user, setUser] = useState<UserCredentials>({
@@ -12,7 +13,7 @@ export default function RegisterPage() {
     email: '',
     password: '',
   });
-  
+
   const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(user);
@@ -66,7 +67,7 @@ export default function RegisterPage() {
           </Button>
         </form>
         <p className="text-sm text-gray-600 mt-4 text-center">
-          Já tem uma conta? <a href="/login" className="text-blue-500">Entrar</a>
+          Já tem uma conta? <Link href="/login" className="text-blue-500">Entrar</Link>
         </p>
       </div>
     </div>

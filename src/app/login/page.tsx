@@ -4,6 +4,7 @@ import { Input } from "@/app/components/ui/input";
 
 import { UserCredentials } from "@/@types/user";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function LoginPage() {
     const [user, setUser] = useState<UserCredentials>({
@@ -13,7 +14,7 @@ export default function LoginPage() {
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+
     console.log(user);
   };
 
@@ -54,7 +55,7 @@ export default function LoginPage() {
           </Button>
         </form>
         <p className="text-sm text-gray-600 mt-4 text-center">
-          Não tem uma conta? <a href="/register" className="text-blue-500">Cadastre-se</a>
+          Não tem uma conta? <Link href="/register" className="text-blue-500">Cadastre-se</Link>
         </p>
       </div>
     </div>
