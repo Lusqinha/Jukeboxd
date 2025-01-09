@@ -18,7 +18,7 @@ export const authOptions: AuthOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  debug: isProd ? false : true,
+  debug: !isProd,
   pages: {
     signIn: '/login'
   },
@@ -37,7 +37,7 @@ export const authOptions: AuthOptions = {
       session.user = {
         ...session.user,
         id: token.sub || "",
-        avatar_url: session.user.image || "",
+        avatar_url: session.user?.image || "",
         accessToken: token.accessToken,
       } as UserProfile;
       return session;
