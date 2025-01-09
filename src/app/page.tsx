@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useState } from "react";
-import { Header } from "./components/header";
+import { Header } from "./components/Header";
 import { Navigation } from "./components/navigation";
 import { Section } from "./components/section";
 
