@@ -1,4 +1,5 @@
 import { UserProfile } from "@/@types/user";
+import { isProd } from "@/utils/environment";
 import { AuthOptions } from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 
@@ -17,7 +18,10 @@ export const authOptions: AuthOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  debug: true,
+  debug: isProd ? false : true,
+  pages: {
+    signIn: '/login'
+  },
   callbacks: {
     async jwt({ token, account, user }) {
 
