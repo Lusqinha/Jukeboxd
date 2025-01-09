@@ -34,7 +34,7 @@ export default function UserHeader({ userName, userEmail, userAvatar }: UserHead
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">
           <DropdownMenuItem>
-            <Settings className="mr-2 h-4 w-4" />
+          <Settings className="mr-2 h-4 w-4" />
             <span>Configurações</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => signOut()}>

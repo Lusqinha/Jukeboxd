@@ -13,9 +13,6 @@ export function Header() {
   return (
     <div className="bg-black">
       <header className="flex items-center justify-between p-4">
-        <Button variant="ghost" size="icon">
-          <Settings className="h-5 w-5 text-white" />
-        </Button>
         <h1 className="text-xl text-white font-semibold">Jukeboxd</h1>
         {status === "loading" ? (
           <Skeleton className="w-[100px] h-[40px] rounded-full bg-zinc-800" />
