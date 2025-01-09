@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/app/components/ui/button";
 import { Search } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
 
 interface Album {
   name: string;

@@ -1,5 +1,5 @@
-import { AlbumCard } from "./album-card";
-import { Button } from "./ui/button";
+import { AlbumCard } from "@/app/components/album-card";
+import { Button } from "@/app/components/ui/button";
 import { ChevronRight } from "lucide-react";
 
 interface Album {
