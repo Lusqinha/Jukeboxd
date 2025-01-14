@@ -1,19 +1,17 @@
 import { UserProfile } from "@/@types/user";
+import { createSpotifyApiInstance } from "@/lib/spotifyApi";
 import { isProd } from "@/utils/environment";
 import { AuthOptions } from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
+
+const spotifyApi = createSpotifyApiInstance();
 
 export const authOptions: AuthOptions = {
   providers: [
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID!,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
-      authorization: {
-        url: "https://accounts.spotify.com/authorize",
-        params: {
-          scope: "user-read-email user-read-private",
-        },
-      },
+      authorization: spotifyApi.getAuthorization(),
       token: "https://accounts.spotify.com/api/token",
     }),
   ],
