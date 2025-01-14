@@ -28,7 +28,9 @@ class SpotifyApi {
     this.refreshToken = config.refreshToken;
   }
 
-
+  getAuthorization(): AuthorizationEndpointHandler {
+    
+  }
 }
 
 export function createSpotifyApiInstance(accessToken?: string, refreshToken?: string) {

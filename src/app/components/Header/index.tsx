@@ -6,6 +6,7 @@ import { Button } from "@/app/components/ui/button"
 import { useSession } from "next-auth/react";
 import UserHeader from './user-header';
 import { Skeleton } from "@/app/components/ui/skeleton"
+import Link from 'next/link';
 
 export function Header() {
   const { data: session, status } = useSession();
@@ -23,9 +24,11 @@ export function Header() {
             userAvatar={session.user.image!} 
           />
         ) : (
-          <Button variant="outline" onClick={() => signIn("spotify")}>
-            Entrar
-          </Button>
+          <Link href={'login'}>
+            <Button variant="outline">
+              Entrar
+            </Button>
+          </Link>
         )}
       </header>
     </div>
