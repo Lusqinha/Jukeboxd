@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useState } from "react";
-import { Header } from "./components/header";
+import { Header } from "./components/Header";
 import { Navigation } from "./components/navigation";
 import { Section } from "./components/section";
 
@@ -15,7 +15,7 @@ interface Album {
 
 export default function Home() {
   const [albums, setAlbums] = useState<Album[]>([]); // Use o tipo Album para garantir a tipagem correta
-
+  
   const handleAlbumsFetched = (fetchedAlbums: Album[]) => {
     setAlbums(fetchedAlbums);
   };
@@ -31,5 +31,3 @@ export default function Home() {
     </div>
   );
 }
-
-
